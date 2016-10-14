@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity
                 {
                     // TODO do something
                     handled = true;
-                    doGetRequest(test.getText().toString());
+                    doGetRequest(test.getText().toString().trim());
                     adapter_data.add(new Text(test.getText().toString(),true));
                     adapter.notifyDataSetChanged();
                     InputMethodManager inputManager = (InputMethodManager)
@@ -155,7 +155,8 @@ public class MainActivity extends AppCompatActivity
             default: result = "";
                 break;
         }
-        adapter_data.add(new Text(result,true));
+        adapter_data.add(new Text(result,false));
         adapter.notifyDataSetChanged();
+        chat_view.smoothScrollToPosition(adapter_data.size());
     }
 }

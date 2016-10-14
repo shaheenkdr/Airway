@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -22,13 +23,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.FeedsViewH
         private TextView chat;
         private Typeface face;
 
-        FeedsViewHolder(View itemView)
+
+                FeedsViewHolder(View itemView)
         {
             super(itemView);
 
             chat = (TextView)itemView.findViewById(R.id.chatMessage);
-            //face = Typeface.createFromAsset(itemView.getContext().getAssets(), "Fonts/Roboto-Regular.ttf");
-            //chat.setTypeface(face);
+            face = Typeface.createFromAsset(itemView.getContext().getAssets(), "Fonts/Roboto-Regular.ttf");
+            chat.setTypeface(face);
 
 
         }
@@ -70,17 +72,26 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.FeedsViewH
     @Override
     public void onBindViewHolder(FeedsViewHolder feedViewHolder, int i)
     {
+        RelativeLayout.LayoutParams params =
+                (RelativeLayout.LayoutParams)feedViewHolder.chat.getLayoutParams();
+
         if(d1.feeds.get(i).isMachineOrHuman())
         {
+            params.addRule(RelativeLayout.ALIGN_PARENT_START);
+            feedViewHolder.chat.setLayoutParams(params);
             feedViewHolder.chat.setBackgroundResource(R.drawable.user);
-            feedViewHolder.chat.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
+            feedViewHolder.chat.setText(d1.feeds.get(i).getMessage());
         }
 
         else
+        {
+            params.addRule(RelativeLayout.ALIGN_PARENT_END);
+            feedViewHolder.chat.setLayoutParams(params);
             feedViewHolder.chat.setBackgroundResource(R.drawable.ais);
+            feedViewHolder.chat.setText(d1.feeds.get(i).getMessage());
+        }
 
 
-        feedViewHolder.chat.setText(d1.feeds.get(i).getMessage());
 
     }
 
