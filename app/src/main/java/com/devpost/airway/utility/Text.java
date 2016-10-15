@@ -1,4 +1,4 @@
-package com.devpost.airway;
+package com.devpost.airway.utility;
 
 
 public class Text
@@ -6,7 +6,7 @@ public class Text
     private String message;
     private boolean machine_or_human;
 
-    Text(String message,boolean machine_or_human)
+    public Text(String message,boolean machine_or_human)
     {
         this.message = message;
         this.machine_or_human = machine_or_human;

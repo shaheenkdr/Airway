@@ -1,9 +1,10 @@
-package com.devpost.airway;
+package com.devpost.airway.api;
 
+
+import com.devpost.airway.pojo.LuisPojo;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiInterface {

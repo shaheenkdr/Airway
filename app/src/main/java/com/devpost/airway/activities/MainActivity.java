@@ -1,4 +1,4 @@
-package com.devpost.airway;
+package com.devpost.airway.activities;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +13,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.devpost.airway.R;
+import com.devpost.airway.utility.Text;
+import com.devpost.airway.adapter.CustomAdapter;
+import com.devpost.airway.api.ApiClient;
+import com.devpost.airway.api.ApiInterface;
 import com.devpost.airway.bus.LuisResponseBus;
 import com.devpost.airway.intents.Booking;
 import com.devpost.airway.intents.Food;
@@ -22,6 +27,8 @@ import com.devpost.airway.intents.Help;
 import com.devpost.airway.intents.None;
 import com.devpost.airway.intents.Personal;
 import com.devpost.airway.intents.Places;
+import com.devpost.airway.pojo.IntentX;
+import com.devpost.airway.pojo.LuisPojo;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

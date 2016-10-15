@@ -1,7 +1,9 @@
-package com.devpost.airway;
+package com.devpost.airway.pojo;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.devpost.airway.pojo.IntentX;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

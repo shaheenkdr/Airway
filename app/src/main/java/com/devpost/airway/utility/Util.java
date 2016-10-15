@@ -1,4 +1,4 @@
-package com.devpost.airway;
+package com.devpost.airway.utility;
 
 
 import java.util.Random;

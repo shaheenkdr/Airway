@@ -1,4 +1,4 @@
-package com.devpost.airway;
+package com.devpost.airway.activities;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -11,6 +11,8 @@ import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
+
+import com.devpost.airway.R;
 
 public class WebViewActivity extends AppCompatActivity
 {

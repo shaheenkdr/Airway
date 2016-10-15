@@ -1,4 +1,4 @@
-package com.devpost.airway;
+package com.devpost.airway.pojo;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

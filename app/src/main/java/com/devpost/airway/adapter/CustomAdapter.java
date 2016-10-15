@@ -1,4 +1,4 @@
-package com.devpost.airway;
+package com.devpost.airway.adapter;
 
 
 import android.content.Context;
@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.devpost.airway.R;
+import com.devpost.airway.utility.Text;
 
 import java.util.List;
 
@@ -50,7 +53,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.FeedsViewH
 
 
 
-    CustomAdapter(List<Text> feeds)
+    public CustomAdapter(List<Text> feeds)
     {
         this.d1.feeds = feeds;
     }

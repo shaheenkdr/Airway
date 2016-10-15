@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingStart="10dp"
     android:paddingEnd="10dp"
-    tools:context="com.devpost.airway.MainActivity">
+    tools:context=".activities.MainActivity">
 
 
     <android.support.v7.widget.RecyclerView

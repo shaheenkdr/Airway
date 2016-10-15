@@ -1,4 +1,4 @@
-package com.devpost.airway;
+package com.devpost.airway.api;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

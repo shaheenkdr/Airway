@@ -1,9 +1,7 @@
 package com.devpost.airway.intents;
 
 
-import com.devpost.airway.Util;
-
-import java.util.concurrent.ThreadLocalRandom;
+import com.devpost.airway.utility.Util;
 
 public class Booking
 {

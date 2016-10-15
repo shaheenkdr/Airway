@@ -1,7 +1,7 @@
 package com.devpost.airway.intents;
 
 
-import com.devpost.airway.Util;
+import com.devpost.airway.utility.Util;
 
 public class Games
 {
