@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity
     private Text test1;
     private Text test2;
     private Text test3;
-    private static final String id ="44e80599-c74c-4bc7-b30e-41730a6adfb2";
-    private static final String sub_key ="3c12c7fd5d4c408ab856288e695ee5f7";
+    private static final String id ="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+    private static final String sub_key ="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 
 
     @Override
