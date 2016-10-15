@@ -1,6 +1,7 @@
 package com.devpost.airway.intents;
 
 
+import com.devpost.airway.utility.Response;
 import com.devpost.airway.utility.Util;
 
 public class Greetings
@@ -9,22 +10,26 @@ public class Greetings
     private static final String[] heylo = {"hi","hello"};
     private static final String def = "Hey there, how are you doing?";
     private static final int CODE = 4;
+    private static String result;
 
 
-    public static String chooseGreetings(String message)
+    public static Response chooseGreetings(String message)
     {
         if(message.contains("morning")||message.contains("evening")||message.contains("night")&&message.contains("good"))
         {
-            return good;
+            result = good;
+            return new Response(CODE,result,5,false);
         }
 
         else if(message.contains("hi")||message.contains("hello")||message.contains("hey")||message.contains("hoy"))
         {
-            return heylo[Util.getRandom(heylo.length)];
+            result = heylo[Util.getRandom(heylo.length)];
+            return new Response(CODE,result,5,false);
         }
         else
         {
-            return def;
+            result = def;
+            return new Response(CODE,result,9,false);
         }
     }
 

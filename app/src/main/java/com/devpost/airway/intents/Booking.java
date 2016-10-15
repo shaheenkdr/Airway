@@ -1,6 +1,7 @@
 package com.devpost.airway.intents;
 
 
+import com.devpost.airway.utility.Response;
 import com.devpost.airway.utility.Util;
 
 public class Booking
@@ -11,19 +12,19 @@ public class Booking
     private static String result;
     private static final int CODE = 1;
 
-    public static String chooseBooking(String message)
+    public static Response chooseBooking(String message)
     {
 
         if(message.contains("discount")||message.contains("cheap"))
         {
             result = discount[Util.getRandom(discount.length)]+option;
-            return result;
+            return new Response(CODE,result,9,false);
         }
 
         else
         {
             result = values[Util.getRandom(values.length)]+option;
-            return result;
+            return new Response(CODE,result,9,false);
         }
     }
 

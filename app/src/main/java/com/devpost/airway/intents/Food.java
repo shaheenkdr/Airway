@@ -1,6 +1,7 @@
 package com.devpost.airway.intents;
 
 
+import com.devpost.airway.utility.Response;
 import com.devpost.airway.utility.Util;
 
 public class Food
@@ -13,31 +14,31 @@ public class Food
     private static final String[] lunch_values = {"Would you like to see the nearby hotels that serves lunch ","Shall I find the best restaurants nearby that serves lunch ","May I search for the finest restaurants here that serves the best lunch "};
     private static final String[] breakfast_values = {"Would you like to see the nearby hotels that serves breakfast ","Shall I find the best restaurants nearby that serves breakfast ","May I search for the finest restaurants here that serves the best breakfast "};
 
-    public static String chooseFood(String message)
+    public static Response chooseFood(String message)
     {
         if(message.contains("dinner")&&!message.contains("lunch")&&!message.contains("breakfast"))
         {
             result = dinner_values[Util.getRandom(dinner_values.length)]+option;
-            return result;
+            return new Response(CODE,result,9,false);
 
         }
         else if(message.contains("breakfast")&&!message.contains("dinner")&&!message.contains("lunch"))
         {
             result = breakfast_values[Util.getRandom(breakfast_values.length)]+option;
-            return result;
+            return new Response(CODE,result,9,false);
 
         }
         else if(message.contains("lunch")&&!message.contains("breakfast")&&!message.contains("dinner"))
         {
             result = lunch_values[Util.getRandom(lunch_values.length)]+option;
-            return result;
+            return new Response(CODE,result,9,false);
 
 
         }
         else
         {
             result = values[Util.getRandom(values.length)]+option;
-            return  result;
+            return new Response(CODE,result,9,false);
         }
     }
 }
