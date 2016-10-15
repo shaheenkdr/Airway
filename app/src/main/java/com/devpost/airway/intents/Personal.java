@@ -9,6 +9,8 @@ public class Personal
     private static final String love = "yes I do, and fly safe :)";
     private static final String parents = "The Airberlin team is my family, they created me and maintains me";
     private static final String def = "Confused,wish I did knew that!";
+    private static final int CODE = 8;
+
 
     public static String choosePersonal(String message)
     {

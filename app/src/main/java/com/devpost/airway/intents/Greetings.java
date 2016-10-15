@@ -8,6 +8,8 @@ public class Greetings
     private static final String good = "Wish you the same, have a good day and fly safe";
     private static final String[] heylo = {"hi","hello"};
     private static final String def = "Hey there, how are you doing?";
+    private static final int CODE = 4;
+
 
     public static String chooseGreetings(String message)
     {

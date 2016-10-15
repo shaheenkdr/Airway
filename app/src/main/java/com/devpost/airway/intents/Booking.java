@@ -11,6 +11,7 @@ public class Booking
     private static final String option = "Reply with YES or NO" ;
     private static final String[] discount = {"Shall I help you choose a cheap flight ticket? ", "Would you like to book an air ticket with discount? "};
     private static String result;
+    private static final int CODE = 1;
 
     public static String chooseBooking(String message)
     {

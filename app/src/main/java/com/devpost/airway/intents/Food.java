@@ -6,6 +6,7 @@ import com.devpost.airway.Util;
 public class Food
 {
     private static String result;
+    private static final int CODE = 2;
     private static final String[] values = {"Would you like to see the nearby hotels? ", "Shall I find the best restaurants nearby? ", "May I search for the finest restaurants here? ","May I show you the best place to get the best food here? ","I can find the best restaurants for you,shall I ? ","I can help you find the best food out here, may I try "};
     private static final String option = "Reply with YES or NO" ;
     private static final String[] dinner_values = {"Would you like to see the nearby hotels that serves dinner ","Shall I find the best restaurants nearby that serves dinner ","May I search for the finest restaurants here that serves the best dinner "};
