@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/chat_rel"
+    android:padding="0dip"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -9,7 +10,7 @@
     android:layout_marginBottom="10dp"
     android:layout_marginStart="10dp"
     android:layout_marginEnd="10dp"
-    android:gravity="start"
+
     android:textSize="15sp"
     android:textColor="#ffffff"
     android:layout_height="wrap_content"

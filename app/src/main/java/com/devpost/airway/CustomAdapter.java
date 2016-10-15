@@ -1,8 +1,11 @@
 package com.devpost.airway;
 
 
+import android.content.Context;
 import android.graphics.Typeface;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,12 +25,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.FeedsViewH
     {
         private TextView chat;
         private Typeface face;
+        private Context mcontext;
 
-
-                FeedsViewHolder(View itemView)
+        FeedsViewHolder(View itemView)
         {
             super(itemView);
-
+            mcontext = itemView.getContext();
             chat = (TextView)itemView.findViewById(R.id.chatMessage);
             face = Typeface.createFromAsset(itemView.getContext().getAssets(), "Fonts/Roboto-Regular.ttf");
             chat.setTypeface(face);
@@ -79,7 +82,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.FeedsViewH
         {
             params.addRule(RelativeLayout.ALIGN_PARENT_START);
             feedViewHolder.chat.setLayoutParams(params);
-            feedViewHolder.chat.setBackgroundResource(R.drawable.user);
+            feedViewHolder.chat.setGravity(Gravity.START);
+            feedViewHolder.chat.setBackground(ContextCompat.getDrawable(feedViewHolder.mcontext, R.drawable.user));
             feedViewHolder.chat.setText(d1.feeds.get(i).getMessage());
         }
 
@@ -87,7 +91,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.FeedsViewH
         {
             params.addRule(RelativeLayout.ALIGN_PARENT_END);
             feedViewHolder.chat.setLayoutParams(params);
-            feedViewHolder.chat.setBackgroundResource(R.drawable.ais);
+            feedViewHolder.chat.setGravity(Gravity.END);
+            feedViewHolder.chat.setBackground(ContextCompat.getDrawable(feedViewHolder.mcontext, R.drawable.ais));
             feedViewHolder.chat.setText(d1.feeds.get(i).getMessage());
         }
 

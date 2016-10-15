@@ -11,6 +11,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.devpost.airway.bus.LuisResponseBus;
 import com.devpost.airway.intents.Booking;
@@ -40,9 +41,8 @@ public class MainActivity extends AppCompatActivity
     private Text test1;
     private Text test2;
     private Text test3;
-    private static final String id ="xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx";
-    private static final String sub_key ="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
-    private static final String query ="hello%20world";
+    private static final String id ="44e80599-c74c-4bc7-b30e-41730a6adfb2";
+    private static final String sub_key ="3c12c7fd5d4c408ab856288e695ee5f7";
 
 
     @Override
@@ -77,8 +77,10 @@ public class MainActivity extends AppCompatActivity
                     // TODO do something
                     handled = true;
                     doGetRequest(test.getText().toString().trim());
+                    Log.e("WhileSending",""+test.getText().toString().trim());
                     adapter_data.add(new Text(test.getText().toString(),true));
                     adapter.notifyDataSetChanged();
+                    chat_view.smoothScrollToPosition(adapter_data.size()-1);
                     InputMethodManager inputManager = (InputMethodManager)
                             getSystemService(Context.INPUT_METHOD_SERVICE);
 
@@ -92,32 +94,41 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private static void doGetRequest(final String message)
+    private  void doGetRequest(final String message)
     {
         ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
 
-        Call<LuisPojo> call = apiService.getValues(id,sub_key,Util.formatUrl(message));
+        Call<LuisPojo> call = apiService.getValues(id,sub_key,message);
         call.enqueue(new Callback<LuisPojo>()
         {
             @Override
             public void onResponse(Call<LuisPojo>call, Response<LuisPojo> response)
             {
-                double temp = 0;
-                StringBuilder val = new StringBuilder();
-                List<IntentX> intx = response.body().getIntents();
-                Log.e("Intentx",""+intx.size());
-                for(IntentX x:intx)
+                try
                 {
-                    Log.e("Intents",""+x.getIntent());
-                    if(x.getScore()>temp)
+                    double temp = 0;
+                    StringBuilder val = new StringBuilder();
+                    Log.e("Thenga",""+response.body().toString());
+                    List<IntentX> intx = response.body().getIntents();
+                    Log.e("Intentx",""+intx.size());
+                    for(IntentX x:intx)
                     {
-                        temp = x.getScore();
-                        val.setLength(0);
-                        val.append(x.getIntent());
+                        Log.e("Intents",""+x.getIntent());
+                        if(x.getScore()>temp)
+                        {
+                            temp = x.getScore();
+                            val.setLength(0);
+                            val.append(x.getIntent());
+                        }
                     }
+                    EventBus.getDefault().post(new LuisResponseBus(val.toString(),message));
+
                 }
-                EventBus.getDefault().post(new LuisResponseBus(val.toString(),message));
+                catch (Exception e)
+                {
+                    Toast.makeText(MainActivity.this, "Check data connection", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -157,6 +168,6 @@ public class MainActivity extends AppCompatActivity
         }
         adapter_data.add(new Text(result,false));
         adapter.notifyDataSetChanged();
-        chat_view.smoothScrollToPosition(adapter_data.size());
+        chat_view.smoothScrollToPosition(adapter_data.size()-1);
     }
 }
