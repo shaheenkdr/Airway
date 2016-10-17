@@ -1,6 +1,7 @@
 package com.devpost.airway.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.devpost.airway.R;
+import com.devpost.airway.actions.ActionStarter;
 import com.devpost.airway.intents.Meditate;
 import com.devpost.airway.utility.ResponseX;
 import com.devpost.airway.utility.Text;
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity
     private Text test1;
     private Text test2;
     private Text test3;
+    private Context mContext;
     private static int event_id;
     private static int response_code;
     private static boolean flag;
@@ -58,6 +61,9 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent ss = new Intent(MainActivity.this,MeditationActivity.class);
+        startActivity(ss);
+        finish();
         EventBus myEventBus = EventBus.getDefault();
         EventBus.getDefault().register(this);
         event_id = response_code = -1;
@@ -74,7 +80,7 @@ public class MainActivity extends AppCompatActivity
         chat_view.setLayoutManager(llm);
         adapter = new CustomAdapter(adapter_data);
         chat_view.setAdapter(adapter);
-
+        mContext = getApplicationContext();
         final EditText test = (EditText)findViewById(R.id.chat_input);
         test.setOnEditorActionListener(new TextView.OnEditorActionListener()
         {
@@ -162,7 +168,15 @@ public class MainActivity extends AppCompatActivity
         {
             if(event.getOriginalMessage().contains("yes")||event.getOriginalMessage().contains("ye")||event.getOriginalMessage().contains("yea")||event.getOriginalMessage().contains("yeah"))
             {
-                Toast.makeText(getApplicationContext(), "Shwriiinkaaa", Toast.LENGTH_SHORT).show();
+                if(getEventIdForIntent(event.getIntentName())==1)
+                {
+                    ActionStarter a1 = new ActionStarter(mContext,1);
+                }
+
+                if(getEventIdForIntent(event.getIntentName())==3)
+                {
+                    ActionStarter a1 = new ActionStarter(mContext,3);
+                }
             }
             else
             {

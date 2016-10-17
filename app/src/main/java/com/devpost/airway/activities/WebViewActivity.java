@@ -17,12 +17,23 @@ import com.devpost.airway.R;
 public class WebViewActivity extends AppCompatActivity
 {
     private ProgressDialog prDialog;
-    private static final String URL = "http://flappybird.io/";
+    private static String URL ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
+
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                URL = null;
+            } else {
+                URL = extras.getString("URL");
+            }
+        } else {
+            URL = (String) savedInstanceState.getSerializable("URL");
+        }
         WebView browser = (WebView) findViewById(R.id.webview);
 
 

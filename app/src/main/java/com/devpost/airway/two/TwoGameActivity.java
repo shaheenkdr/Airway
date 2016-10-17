@@ -4,10 +4,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Window;
 
-public class TwoGameActivity extends ActionBarActivity {
+public class TwoGameActivity extends AppCompatActivity {
 
     private static final String WIDTH = "width";
     private static final String HEIGHT = "height";

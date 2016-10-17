@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/test"
+    android:layout_height="match_parent"
+    tools:context="com.devpost.airway.activities.MeditationActivity">
+    <ImageView
+        android:src="@drawable/med"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+
+    <ImageButton
+        android:id="@+id/playButton"
+        android:layout_marginStart="50dp"
+        android:background="@drawable/play2"
+        android:layout_marginBottom="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+
+    <ImageButton
+        android:id="@+id/timerButton"
+        android:background="@drawable/timer"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="100dp"
+        android:layout_marginEnd="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+
+
+</RelativeLayout>
