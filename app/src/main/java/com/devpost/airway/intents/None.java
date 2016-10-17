@@ -1,7 +1,7 @@
 package com.devpost.airway.intents;
 
 
-import com.devpost.airway.utility.Response;
+import com.devpost.airway.utility.ResponseX;
 import com.devpost.airway.utility.Util;
 
 public class None
@@ -11,10 +11,10 @@ public class None
     private static String result;
 
 
-    public static Response chooseNone()
+    public static ResponseX chooseNone()
     {
         result = values[Util.getRandom(values.length)];
-        return new Response(CODE,result,0,false);
+        return new ResponseX(CODE,result,0,false);
     }
 
 

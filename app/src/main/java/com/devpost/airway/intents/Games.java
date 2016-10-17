@@ -1,7 +1,7 @@
 package com.devpost.airway.intents;
 
 
-import com.devpost.airway.utility.Response;
+import com.devpost.airway.utility.ResponseX;
 import com.devpost.airway.utility.Util;
 
 public class Games
@@ -12,10 +12,10 @@ public class Games
     private static final int CODE = 3;
 
 
-    public static Response chooseGames(String message)
+    public static ResponseX chooseGames(String message)
     {
         result = values[Util.getRandom(values.length)]+option;
-        return new Response(CODE,result,9,false);
+        return new ResponseX(CODE,result,9,false);
     }
 
 }

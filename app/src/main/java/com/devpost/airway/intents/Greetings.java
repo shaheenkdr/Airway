@@ -1,7 +1,7 @@
 package com.devpost.airway.intents;
 
 
-import com.devpost.airway.utility.Response;
+import com.devpost.airway.utility.ResponseX;
 import com.devpost.airway.utility.Util;
 
 public class Greetings
@@ -13,23 +13,23 @@ public class Greetings
     private static String result;
 
 
-    public static Response chooseGreetings(String message)
+    public static ResponseX chooseGreetings(String message)
     {
         if(message.contains("morning")||message.contains("evening")||message.contains("night")&&message.contains("good"))
         {
             result = good;
-            return new Response(CODE,result,5,false);
+            return new ResponseX(CODE,result,5,false);
         }
 
         else if(message.contains("hi")||message.contains("hello")||message.contains("hey")||message.contains("hoy"))
         {
             result = heylo[Util.getRandom(heylo.length)];
-            return new Response(CODE,result,5,false);
+            return new ResponseX(CODE,result,5,false);
         }
         else
         {
             result = def;
-            return new Response(CODE,result,9,false);
+            return new ResponseX(CODE,result,9,false);
         }
     }
 

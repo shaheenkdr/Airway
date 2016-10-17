@@ -1,7 +1,7 @@
 package com.devpost.airway.intents;
 
 
-import com.devpost.airway.utility.Response;
+import com.devpost.airway.utility.ResponseX;
 import com.devpost.airway.utility.Util;
 
 public class Help
@@ -12,9 +12,9 @@ public class Help
     private static String result;
 
 
-    public static Response chooseHelp()
+    public static ResponseX chooseHelp()
     {
         result = values[Util.getRandom(values.length)]+option;
-        return new Response(CODE,result,9,false);
+        return new ResponseX(CODE,result,9,false);
     }
 }

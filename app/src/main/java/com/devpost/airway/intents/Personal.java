@@ -1,7 +1,7 @@
 package com.devpost.airway.intents;
 
 
-import com.devpost.airway.utility.Response;
+import com.devpost.airway.utility.ResponseX;
 import com.devpost.airway.utility.Util;
 
 public class Personal
@@ -14,32 +14,32 @@ public class Personal
     private static String result;
 
 
-    public static Response choosePersonal(String message)
+    public static ResponseX choosePersonal(String message)
     {
         if(message.contains("marry")&&message.contains("me"))
         {
             result = marry[Util.getRandom(marry.length)];
-            return new Response(CODE,result,0,false);
+            return new ResponseX(CODE,result,0,false);
         }
 
         else if(message.contains("love")&&message.contains("me"))
         {
             result = love;
-            return new Response(CODE,result,0,false);
+            return new ResponseX(CODE,result,0,false);
 
         }
 
         else if(message.contains("parents")||message.contains("father")||message.contains("mother")&&message.contains("your"))
         {
             result = parents;
-            return new Response(CODE,result,0,false);
+            return new ResponseX(CODE,result,0,false);
 
         }
 
         else
         {
             result = def;
-            return new Response(CODE,result,0,false);
+            return new ResponseX(CODE,result,0,false);
         }
 
     }

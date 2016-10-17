@@ -1,14 +1,14 @@
 package com.devpost.airway.utility;
 
 
-public class Response
+public class ResponseX
 {
     private final int EVENT_ID_TAG;
     private final String RESPONSE;
     private final int RESPONSE_TYPE_CODE;
     private final boolean REPEATED;
 
-    public Response(int EVENT_ID_TAG,String RESPONSE,int RESPONSE_TYPE_CODE,boolean REPEATED)
+    public ResponseX(int EVENT_ID_TAG, String RESPONSE, int RESPONSE_TYPE_CODE, boolean REPEATED)
     {
         this.EVENT_ID_TAG = EVENT_ID_TAG;
         this.RESPONSE = RESPONSE;

@@ -12,8 +12,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.devpost.airway.R;
+import com.devpost.airway.intents.Meditate;
+import com.devpost.airway.utility.ResponseX;
 import com.devpost.airway.utility.Text;
 import com.devpost.airway.adapter.CustomAdapter;
 import com.devpost.airway.api.ApiClient;
@@ -29,10 +30,8 @@ import com.devpost.airway.intents.Personal;
 import com.devpost.airway.intents.Places;
 import com.devpost.airway.pojo.IntentX;
 import com.devpost.airway.pojo.LuisPojo;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-
 import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
@@ -48,6 +47,9 @@ public class MainActivity extends AppCompatActivity
     private Text test1;
     private Text test2;
     private Text test3;
+    private static int event_id;
+    private static int response_code;
+    private static boolean flag;
     private static final String id ="44e80599-c74c-4bc7-b30e-41730a6adfb2";
     private static final String sub_key ="3c12c7fd5d4c408ab856288e695ee5f7";
 
@@ -58,8 +60,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         EventBus myEventBus = EventBus.getDefault();
         EventBus.getDefault().register(this);
-        //Intent ss = new Intent(MainActivity.this,TwoGameActivity.class);
-        //startActivity(ss);
+        event_id = response_code = -1;
+        flag = false;
         test1 = new Text("Hello I am tom cruise",true);
         test2 = new Text("wow nice to meet",false);
         test3 = new Text("nice to meet you",true);
@@ -150,32 +152,96 @@ public class MainActivity extends AppCompatActivity
     @Subscribe
     public void onEvent(LuisResponseBus event)
     {
-        String name = event.getIntentName();
-        String result;
+        responseProcessor(event);
+    }
 
-        switch (name)
+    private void responseProcessor(LuisResponseBus event)
+    {
+        ResponseX reply_msg = new ResponseX(0,"",99,false);
+        if(flag)
         {
-            case "None": result = None.chooseNone();
+            if(event.getOriginalMessage().contains("yes")||event.getOriginalMessage().contains("ye")||event.getOriginalMessage().contains("yea")||event.getOriginalMessage().contains("yeah"))
+            {
+                Toast.makeText(getApplicationContext(), "Shwriiinkaaa", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                flag = false;
+            }
+        }
+        else
+        {
+            if(getEventIdForIntent(event.getIntentName())!=8 && getEventIdForIntent(event.getIntentName())!=7 && getEventIdForIntent(event.getIntentName())!=4)
+            {
+                switch (getEventIdForIntent(event.getIntentName()))
+                {
+                    case 1: reply_msg = Booking.chooseBooking(event.getOriginalMessage());
+                        break;
+                    case 2: reply_msg = Food.chooseFood(event.getOriginalMessage());
+                        break;
+                    case 3: reply_msg = Games.chooseGames(event.getOriginalMessage());
+                        break;
+                    case 5: reply_msg = Help.chooseHelp();
+                        break;
+                    case 6: reply_msg = Meditate.chooseMeditate(event.getOriginalMessage());
+                        break;
+                    case 9: reply_msg = Places.choosePlace();
+                        break;
+                }
+                flag = true;
+
+            }
+            else
+            {
+                switch (getEventIdForIntent(event.getIntentName()))
+                {
+                    case 8: reply_msg = Personal.choosePersonal(event.getOriginalMessage());
+                        break;
+                    case 7: reply_msg = None.chooseNone();
+                        break;
+                    case 4: reply_msg = Greetings.chooseGreetings(event.getOriginalMessage());
+                        break;
+                }
+                flag = false;
+            }
+            adapter_data.add(new Text(reply_msg.getResponse(),false));
+            adapter.notifyDataSetChanged();
+            chat_view.smoothScrollToPosition(adapter_data.size()-1);
+        }
+
+
+
+    }
+
+
+    private static int getEventIdForIntent(String value)
+    {
+        int ret_value;
+        switch (value)
+        {
+            case "None": ret_value = 7;
                 break;
-            case "Food": result = Food.chooseFood(event.getOriginalMessage());
+            case "Food": ret_value = 2;
                 break;
-            case "Greetings": result = Greetings.chooseGreetings(event.getOriginalMessage());
+            case "Greetings": ret_value = 4;
                 break;
-            case "Booking": result = Booking.chooseBooking(event.getOriginalMessage());
+            case "Booking": ret_value = 1;
                 break;
-            case "help": result = Help.chooseHelp();
+            case "help": ret_value = 5;
                 break;
-            case "games": result = Games.chooseGames(event.getOriginalMessage());
+            case "games": ret_value = 3;
                 break;
-            case "Personal": result = Personal.choosePersonal(event.getOriginalMessage());
+            case "Personal": ret_value = 8;
                 break;
-            case "Places": result = Places.choosePlace();
+            case "Places": ret_value = 9;
                 break;
-            default: result = "";
+            case "Meditate": ret_value = 6;
+                break;
+            default: ret_value = -1;
                 break;
         }
-        adapter_data.add(new Text(result,false));
-        adapter.notifyDataSetChanged();
-        chat_view.smoothScrollToPosition(adapter_data.size()-1);
+
+        return ret_value;
+
     }
 }
