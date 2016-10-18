@@ -3,8 +3,7 @@
     package="com.devpost.airway">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -24,7 +23,8 @@
         <activity android:name=".flappybirdgame.FlappyBirdGame" />
         <activity android:name=".activities.WebViewActivity" />
         <activity android:name=".two.TwoGameActivity" />
-        <activity android:name=".activities.MeditationActivity"></activity>
+        <activity android:name=".activities.MeditationActivity" />
+        <activity android:name=".activities.FoodActivity"></activity>
     </application>
 
 </manifest>
