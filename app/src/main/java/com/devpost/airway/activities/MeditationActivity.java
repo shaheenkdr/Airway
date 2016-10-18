@@ -1,11 +1,15 @@
 package com.devpost.airway.activities;
 
+import android.content.DialogInterface;
 import android.media.MediaPlayer;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.devpost.airway.R;
 
@@ -64,6 +68,66 @@ public class MeditationActivity extends AppCompatActivity
                     mPlayer.pause();
                     length = mPlayer.getCurrentPosition();
                 }
+
+            }
+        });
+
+        timerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                final CharSequence[] items = {"1 min", "2 min", "3 min", "5 min", "10 min","15 min"};
+                AlertDialog.Builder builder =
+                        new AlertDialog.Builder(MeditationActivity.this, R.style.AppCompatAlertDialogStyle);
+                builder.setTitle("Set timer");
+                builder.setItems(items, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        int x=1;
+
+                        switch (which)
+                        {
+                            case 0: x = 1;
+                                break;
+                            case 1: x = 2;
+                                break;
+                            case 2: x = 3;
+                                break;
+                            case 3: x = 5;
+                                break;
+                            case 4: x = 10;
+                                break;
+                            case 5: x = 15;
+                                break;
+                        }
+
+                        int interval = 60000 * x;
+                        Handler handler = new Handler();
+                        Runnable runnable = new Runnable()
+                        {
+                            public void run()
+                            {
+                                try {
+                                    if (mPlayer.isPlaying())
+                                    {
+                                        mPlayer.stop();
+                                    }
+
+
+                                }
+                                catch (Exception e){}
+                            }
+                        };
+
+                        handler.postAtTime(runnable, System.currentTimeMillis()+interval);
+                        handler.postDelayed(runnable, interval);
+                        Toast.makeText(MeditationActivity.this, "timer set for "+items[which], Toast.LENGTH_SHORT).show();
+
+                    }
+
+                });
+                builder.create().show();
 
             }
         });
