@@ -37,7 +37,7 @@ public class Result {
     private Integer priceLevel;
     @SerializedName("rating")
     @Expose
-    private Integer rating;
+    private Double rating;
     @SerializedName("reference")
     @Expose
     private String reference;
@@ -212,7 +212,7 @@ public class Result {
      * @return
      * The rating
      */
-    public Integer getRating() {
+    public Double getRating() {
         return rating;
     }
 
@@ -221,7 +221,7 @@ public class Result {
      * @param rating
      * The rating
      */
-    public void setRating(Integer rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 

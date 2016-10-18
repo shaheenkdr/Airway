@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent ss = new Intent(MainActivity.this,MeditationActivity.class);
+        Intent ss = new Intent(MainActivity.this,FoodActivity.class);
         startActivity(ss);
         finish();
         EventBus myEventBus = EventBus.getDefault();

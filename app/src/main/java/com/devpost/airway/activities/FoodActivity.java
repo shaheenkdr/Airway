@@ -12,6 +12,7 @@ import com.devpost.airway.api.ApiInterface;
 import com.devpost.airway.api.ApiInterfacePlaces;
 import com.devpost.airway.bus.LuisResponseBus;
 import com.devpost.airway.places_api.PlacesPojo;
+import com.devpost.airway.places_api.Result;
 import com.devpost.airway.pojo.IntentX;
 import com.devpost.airway.pojo.LuisPojo;
 import com.devpost.airway.utility.Util;
@@ -30,6 +31,7 @@ public class FoodActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food);
+        doGetRequest("restaurants in los angeles airport");
     }
 
     private  void doGetRequest(final String message)
@@ -45,9 +47,13 @@ public class FoodActivity extends AppCompatActivity {
             {
                 try
                 {
-                    double temp = 0;
-                    StringBuilder val = new StringBuilder();
                     Log.e("Thenga",""+response.body().toString());
+                    List<Result> place_result = response.body().getResults();
+
+                    for(Result x:place_result)
+                    {
+                        Log.e("WOWOW",""+x.getName());
+                    }
 
 
                 }
