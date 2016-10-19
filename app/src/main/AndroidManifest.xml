@@ -25,6 +25,13 @@
         <activity android:name=".two.TwoGameActivity" />
         <activity android:name=".activities.MeditationActivity" />
         <activity android:name=".activities.FoodActivity"></activity>
+
+        <uses-feature
+            android:glEsVersion="0x00020000"
+            android:required="true"/>
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyCdix9RXZGii8K9ox5mldGY5EUl84CIqc4" />
     </application>
 
 </manifest>

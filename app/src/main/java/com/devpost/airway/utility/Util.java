@@ -6,6 +6,7 @@ import java.util.Random;
 public class Util
 {
     private static final String PLACES_API_KEY = "AIzaSyC3MIBq5vh_xmSHBLg6jCavUEXygbHCbmM";
+    private static final String MAPS_API_KEY = "AIzaSyCdix9RXZGii8K9ox5mldGY5EUl84CIqc4";
     private static final String URL = "https://api.projectoxford.ai/luis/v1/application?id=44e80599-c74c-4bc7-b30e-41730a6adfb2&subscription-key=3c12c7fd5d4c408ab856288e695ee5f7&q=";
     public static int getRandom(int num)
     {

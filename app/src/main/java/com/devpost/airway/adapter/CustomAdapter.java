@@ -22,7 +22,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.FeedsViewH
 
 
 
-    DataHolder d1 = new DataHolder();
+    private DataHolder d1 = new DataHolder();
 
     public  class FeedsViewHolder extends RecyclerView.ViewHolder
     {

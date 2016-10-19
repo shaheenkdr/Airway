@@ -61,9 +61,10 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        finish();
         Intent ss = new Intent(MainActivity.this,FoodActivity.class);
         startActivity(ss);
-        finish();
+
         EventBus myEventBus = EventBus.getDefault();
         EventBus.getDefault().register(this);
         event_id = response_code = -1;
