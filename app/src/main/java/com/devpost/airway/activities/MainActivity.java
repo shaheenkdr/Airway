@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.devpost.airway.R;
 import com.devpost.airway.actions.ActionStarter;
 import com.devpost.airway.intents.Meditate;
+import com.devpost.airway.utility.DeveloperKey;
 import com.devpost.airway.utility.ResponseX;
 import com.devpost.airway.utility.Text;
 import com.devpost.airway.adapter.CustomAdapter;
@@ -38,10 +39,15 @@ import com.devpost.airway.intents.Personal;
 import com.devpost.airway.intents.Places;
 import com.devpost.airway.pojo.IntentX;
 import com.devpost.airway.pojo.LuisPojo;
+import com.devpost.airway.utility.Util;
+import com.google.android.youtube.player.YouTubeStandalonePlayer;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -62,6 +68,7 @@ public class MainActivity extends AppCompatActivity
     private static boolean flag;
     private static final String id ="44e80599-c74c-4bc7-b30e-41730a6adfb2";
     private static final String sub_key ="3c12c7fd5d4c408ab856288e695ee5f7";
+    private static final String YOUTUBE_BASE_URL = "https://www.youtube.com/watch?v=";
     private static final int REQUEST_PHONE_CALL = 1;
 
 
@@ -69,7 +76,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "+918511812660"));
+        /*intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "+918511812660"));
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
@@ -84,7 +91,7 @@ public class MainActivity extends AppCompatActivity
         {
             startActivity(intent);
         }
-
+*/
 
         EventBus myEventBus = EventBus.getDefault();
         EventBus.getDefault().register(this);
@@ -129,6 +136,9 @@ public class MainActivity extends AppCompatActivity
                 return handled;
             }
         });
+
+
+
 
     }
     @Override
@@ -241,6 +251,7 @@ public class MainActivity extends AppCompatActivity
                         break;
                 }
                 flag = true;
+                getSupportForPlaces();
 
             }
             else
@@ -294,6 +305,25 @@ public class MainActivity extends AppCompatActivity
         }
 
         return ret_value;
+
+    }
+
+    private void getSupportForPlaces()
+    {
+        String[] place_message={"I think Kashmir is a great place","I strongly feel London is a must visit","How about Paris? You'd definitely love it","The himalayas in India seems like an epic destination","I would definitely travel to St Petersburg in Russia someday","How about Rome in Italy, seems like a classic destination to me","I think Thailand is a cool place","Rajasthan in India seems like an ideal place for a getaway","How about Barcelona, it's a perfect destination","I personally feel you'd like Budapest, Hungary"};
+        String[] place_url = {"9l7wiqEGrfc","PtWeqZsuzpE","x0Pa8aIqmNI","ZQnDpCjtSfE","LAxf-05NTRY","h9fHP9IvbiI","HL69WXRQrO0","CES7WqrYuSE","L_bgTJkFk3k","B_Hfmp-z7AE"};
+
+        int x = Util.getRandom(10);
+        adapter_data.add(new Text(place_message[x],false));
+        adapter.notifyDataSetChanged();
+        chat_view.smoothScrollToPosition(adapter_data.size()-1);
+
+        Intent intent = YouTubeStandalonePlayer.createVideoIntent(MainActivity.this, DeveloperKey.DEVELOPER_KEY, place_url[x]);
+        Bundle extras = new Bundle();
+        extras.putString("YOUTUBE_VIDEO", place_url[x]);
+        intent.putExtras(extras);
+        startActivity(intent);
+
 
     }
 }
