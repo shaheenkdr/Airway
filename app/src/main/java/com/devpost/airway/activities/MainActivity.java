@@ -76,6 +76,9 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        finish();
+        Intent temp = new Intent(MainActivity.this,DelayIndexActivity.class);
+        startActivity(temp);
         /*intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "+918511812660"));
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

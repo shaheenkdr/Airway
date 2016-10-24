@@ -1,10 +1,9 @@
-package com.devpost.airway.flightstats.s.weather;
-
+package com.devpost.airway.flightstats.s.delay;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Airport_ {
+public class Airport {
 
     @SerializedName("fs")
     @Expose
@@ -75,9 +74,9 @@ public class Airport_ {
     @SerializedName("active")
     @Expose
     private Boolean active;
-    @SerializedName("delayIndexUrl")
+    @SerializedName("weatherUrl")
     @Expose
-    private String delayIndexUrl;
+    private String weatherUrl;
 
     /**
      *
@@ -496,19 +495,19 @@ public class Airport_ {
     /**
      *
      * @return
-     * The delayIndexUrl
+     * The weatherUrl
      */
-    public String getDelayIndexUrl() {
-        return delayIndexUrl;
+    public String getWeatherUrl() {
+        return weatherUrl;
     }
 
     /**
      *
-     * @param delayIndexUrl
-     * The delayIndexUrl
+     * @param weatherUrl
+     * The weatherUrl
      */
-    public void setDelayIndexUrl(String delayIndexUrl) {
-        this.delayIndexUrl = delayIndexUrl;
+    public void setWeatherUrl(String weatherUrl) {
+        this.weatherUrl = weatherUrl;
     }
 
 }

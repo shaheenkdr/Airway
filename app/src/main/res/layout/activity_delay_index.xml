@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#f0f0f0"
+    android:paddingStart="5dp"
+    android:paddingEnd="5dp"
+    android:layout_height="match_parent"
+    tools:context="com.devpost.airway.activities.DelayIndexActivity">
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/chart1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/descCard"
+        android:layout_marginBottom="5dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="0dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/descMarker"
+                android:layout_alignParentStart="true"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+
+            <TextView
+                android:id="@+id/pie_desc_text"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:layout_toEndOf="@+id/descMarker"
+                android:layout_marginStart="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

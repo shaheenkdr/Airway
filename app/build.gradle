@@ -4,6 +4,11 @@ android {
     compileSdkVersion 24
     buildToolsVersion "24.0.1"
 
+    allprojects {
+        repositories {
+            maven { url "https://jitpack.io" }
+        }
+    }
     defaultConfig {
         applicationId "com.devpost.airway"
         minSdkVersion 17
@@ -18,12 +23,9 @@ android {
         }
     }
 
-    packagingOptions
-            {
-                exclude 'META-INF/LICENSE'
-                exclude 'META-INF/LICENSE-FIREBASE.txt'
-                exclude 'META-INF/NOTICE'
-            }
+    packagingOptions {
+        pickFirst  'META-INF/license.txt'
+    }
 }
 
 
@@ -41,5 +43,8 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.google.android.gms:play-services-maps:9.6.1'
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.0'
+    compile 'com.github.2359media:EasyAndroidAnimations:0.8'
     compile files('libs/YouTubeAndroidPlayerApi.jar')
+
 }
