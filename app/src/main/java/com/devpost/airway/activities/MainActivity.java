@@ -66,8 +66,8 @@ public class MainActivity extends AppCompatActivity
     private static int response_code;
     private Intent intent;
     private static boolean flag;
-    private static final String id ="44e80599-c74c-4bc7-b30e-41730a6adfb2";
-    private static final String sub_key ="3c12c7fd5d4c408ab856288e695ee5f7";
+    private static final String id ="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX";
+    private static final String sub_key ="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
     private static final String YOUTUBE_BASE_URL = "https://www.youtube.com/watch?v=";
     private static final int REQUEST_PHONE_CALL = 1;
 
