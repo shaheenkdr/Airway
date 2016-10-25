@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         finish();
-        Intent temp = new Intent(MainActivity.this,DelayIndexActivity.class);
+        Intent temp = new Intent(MainActivity.this,FlightTrackerActivity.class);
         startActivity(temp);
         /*intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "+918511812660"));
 
