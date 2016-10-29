@@ -17,6 +17,8 @@
     <string name="reset_dialog_message">Are you sure you wish to reset the game?</string>
 
     <string name="youtube_api_demo">YouTube API Demos</string>
+    <string name="title_dialog">Choose an airport</string>
+    <string name="choose">OK</string>
 
     <string name="videowall_demo_name">Video Wall</string>
     <string name="videolist_demo_name">Video List</string>

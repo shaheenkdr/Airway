@@ -4,13 +4,56 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#f0f0f0"
-    android:paddingStart="5dp"
-    android:paddingEnd="5dp"
     android:layout_height="match_parent"
     tools:context="com.devpost.airway.activities.DelayIndexActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarDelay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/backButton"
+                android:background="@android:color/transparent"
+                android:src="@drawable/back_button"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageButton
+                android:id="@+id/refresh_button"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="15dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/refresh"
+                android:background="@android:color/transparent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/toolbar_text_view"
+                android:text="Delay Index"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/chart1"
+        android:layout_below="@+id/toolbarDelay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true" />
@@ -20,13 +63,16 @@
         android:layout_marginBottom="5dp"
         app:cardCornerRadius="5dp"
         app:cardElevation="0dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:visibility="invisible"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/descMarker"
@@ -36,15 +82,25 @@
 
             <TextView
                 android:id="@+id/pie_desc_text"
-                android:layout_centerInParent="true"
                 android:gravity="center"
-                android:layout_toEndOf="@+id/descMarker"
-                android:layout_marginStart="5dp"
+                android:textSize="15sp"
+                android:layout_centerInParent="true"
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
+
+ <ImageView
+     android:layout_below="@+id/toolbarDelay"
+     android:layout_marginTop="200dp"
+     android:src="@drawable/plane"
+     android:id="@+id/planeImg"
+     android:visibility="invisible"
+     android:layout_centerHorizontal="true"
+     android:layout_width="100dp"
+     android:layout_height="100dp" />
 
 </RelativeLayout>

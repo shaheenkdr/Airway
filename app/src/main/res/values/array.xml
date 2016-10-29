@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="airport_list">
+        <item>Hartsfield Atlanta : ATL</item>
+
+        <item>Chicago O’Hare : ORD</item>
+
+        <item>Los Angeles : LAX</item>
+
+        <item>Dallas Fort Worth : DFW</item>
+
+        <item>Denver : DEN</item>
+
+        <item>John F Kennedy : JFK</item>
+
+        <item>San Francisco : SFO</item>
+
+        <item>Charlotte Douglas : CLT</item>
+
+        <item>McCarran : LAS</item>
+
+        <item>Phoenix Sky Harbor : PHX</item>
+
+        <item>Miami : MIA</item>
+
+        <item>Orlando : MCO</item>
+
+        <item>Newark Liberty : EWR</item>
+
+        <item>Seattle Tacoma : SEA</item>
+
+        <item>Detroit Metropolitan : DTW</item>
+
+        <item>Philadelphia : PHL</item>
+
+        <item>La Guardia : LGA</item>
+
+        <item>Frankfurt : FRA</item>
+
+        <item>Munich : MUC</item>
+
+        <item>Düsseldorf : DUS</item>
+
+        <item>Berlin Tegel : TXL</item>
+
+        <item>Hamburg : HAM</item>
+
+        <item>Stuttgart : STR</item>
+
+        <item>Cologne/Bonn : CGN</item>
+
+        <item>Berlin Schönefeld : SXF</item>
+
+        <item>Hanover : HAJ</item>
+
+        <item>Nuremberg : NUE</item>
+
+        <item>Bremen : BRE</item>
+
+        <item>Hahn : HHN</item>
+
+        <item>Dortmund : DTM</item>
+
+        <item>Weeze : NRN</item>
+
+        <item>Dresden : DRS</item>
+
+        <item>Paderborn : PAD</item>
+
+        <item>Rostock : RLG</item>
+
+        <item>Erfurt/Weimar : ERF</item>
+    </string-array>
+</resources>
