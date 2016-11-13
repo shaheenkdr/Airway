@@ -2,32 +2,24 @@ package com.devpost.airway.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.devpost.airway.R;
-import com.devpost.airway.adapter.CustomPlacesAdapter;
-import com.devpost.airway.api.ApiClient;
 import com.devpost.airway.api.ApiClientPlaces;
-import com.devpost.airway.api.ApiInterface;
 import com.devpost.airway.api.ApiInterfacePlaces;
-import com.devpost.airway.bus.LuisResponseBus;
-import com.devpost.airway.places_api.Geometry;
-import com.devpost.airway.places_api.Location;
 import com.devpost.airway.places_api.PlacesPojo;
 import com.devpost.airway.places_api.Result;
-import com.devpost.airway.pojo.IntentX;
-import com.devpost.airway.pojo.LuisPojo;
 import com.devpost.airway.utility.LatLong;
 import com.devpost.airway.utility.Util;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
 
-
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,20 +36,45 @@ public class FoodActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+        if(getSupportActionBar()!=null)
+            getSupportActionBar().hide();
         setContentView(R.layout.activity_food);
+        ImageButton im1 = (ImageButton)findViewById(R.id.backFood);
+        im1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        new MaterialDialog.Builder(FoodActivity.this)
+                .title(R.string.title_dialog)
+                .items(R.array.airport_list)
+                .itemsCallbackSingleChoice(-1, new MaterialDialog.ListCallbackSingleChoice() {
+                    @Override
+                    public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text)
+                    {
+                        TextView textvv = (TextView)findViewById(R.id.foodtext);
+                        textvv.setText(text.toString());
+                        doGetRequest("restaurants in"+text.toString()+"airport");
+                        Log.e("TWOING",text.toString());
+                        return true;
+                    }
+                })
+                .positiveText(R.string.choose)
+                .show();
 
 
-        doGetRequest("restaurants in los angeles airport");
+
     }
 
     @Override
     public void onMapReady(GoogleMap map) {
-        LatLng sydney = new LatLng(-33.867, 151.206);
 
-        //map.setMyLocationEnabled(false);
         for(LatLong x:list_location)
         {
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(x.getLat(),x.getLng()), 12));
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(x.getLat(),x.getLng()), 15));
             map.addMarker(new MarkerOptions()
                     .title(x.getName())
                     .snippet(x.getAddress())

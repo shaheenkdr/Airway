@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -26,7 +27,18 @@ public class MeditationActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+        if(getSupportActionBar()!=null)
+            getSupportActionBar().hide();
         setContentView(R.layout.activity_meditation);
+
+        ImageButton im1 = (ImageButton)findViewById(R.id.backMeditate);
+        im1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         isTurnedOn = false;
         Random ran = new Random();
         int x = ran.nextInt(3);

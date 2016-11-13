@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    public static final String BASE_URL = "https://api.projectoxford.ai/luis/v1/";
+    public static final String BASE_URL = "https://api.projectoxford.ai/luis/v2.0/apps/";
     private static Retrofit retrofit = null;
 
 

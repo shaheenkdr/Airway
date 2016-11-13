@@ -5,8 +5,40 @@
     android:layout_height="match_parent"
     tools:context="com.devpost.airway.activities.FoodActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:background="#0643a5"
+        android:id="@+id/foodMap"
+        android:layout_width="match_parent"
+        android:elevation="2dp"
+        android:layout_height="60dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/backFood"
+                android:layout_centerVertical="true"
+                android:background="@android:color/transparent"
+                android:src="@drawable/back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/foodtext"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:text="FLIGHT NO: 5674"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/map"
+        android:layout_below="@+id/foodMap"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         class="com.google.android.gms.maps.MapFragment" />

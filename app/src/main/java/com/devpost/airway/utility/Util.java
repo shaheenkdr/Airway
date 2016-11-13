@@ -5,10 +5,10 @@ import java.util.Random;
 
 public class Util
 {
-    private static final String PLACES_API_KEY = "XXX";
+    private static final String PLACES_API_KEY = "AIzaSyC3MIBq5vh_xmSHBLg6jCavUEXygbHCbmM";
     private static final String MAPS_API_KEY = "XXX";
-    private static final String appID = "c38a36d1";
-    private static final String key = "0a1934e7a2d2ad2a82f00feb985c5945";
+    private static final String appID = "93c8de61";
+    private static final String key = "3d57c14dfcc5c511cea99d6cf96c172c";
     private static final String CODE_TYPE = "IATA";
     private static final String URL = "XXX";
     public static int getRandom(int num)

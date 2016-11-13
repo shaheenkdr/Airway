@@ -3,7 +3,7 @@ package com.devpost.airway.pojo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class IntentX {
+public class TopScoringIntent {
 
     @SerializedName("intent")
     @Expose

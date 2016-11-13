@@ -9,8 +9,8 @@ import retrofit2.http.Query;
 
 public interface ApiInterface
 {
-    @GET("application")
-    Call<LuisPojo> getValues(@Query("id") String apiKey, @Query("subscription-key") String key, @Query("q") String q);
+    @GET("44e80599-c74c-4bc7-b30e-41730a6adfb2")
+    Call<LuisPojo> getValues(@Query("subscription-key") String key, @Query("q") String q);
 
 
 }

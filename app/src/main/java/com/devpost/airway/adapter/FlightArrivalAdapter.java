@@ -1,6 +1,8 @@
 package com.devpost.airway.adapter;
 
+import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.devpost.airway.R;
+import com.devpost.airway.activities.FlightMapActivity;
 import com.devpost.airway.flightstats.s.flight_tracker.arrival.ArrivalTrackerPojo;
 import com.devpost.airway.flightstats.s.flight_tracker.arrival.FlightTrack;
 
@@ -59,7 +62,15 @@ public class FlightArrivalAdapter extends RecyclerView.Adapter<FlightArrivalAdap
         @Override
         public void onClick(View view)
         {
-
+            Intent passCoordinates = new Intent(itemView.getContext(), FlightMapActivity.class);
+            Bundle extras = new Bundle();
+            extras.putString("FLIGHT_NAME",d1.arrival_records.get(getLayoutPosition()).getFlightNo());
+            extras.putInt("SPEED",d1.arrival_records.get(getLayoutPosition()).getSpeed());
+            extras.putInt("ALT",d1.arrival_records.get(getLayoutPosition()).getHeight());
+            extras.putDouble("LAT", d1.arrival_records.get(getLayoutPosition()).getLatitude());
+            extras.putDouble("LON", d1.arrival_records.get(getLayoutPosition()).getLongitude());
+            passCoordinates.putExtras(extras);
+            itemView.getContext().startActivity(passCoordinates);
 
 
         }

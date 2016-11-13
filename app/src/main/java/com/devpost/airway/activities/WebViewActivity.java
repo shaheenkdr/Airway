@@ -8,8 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.devpost.airway.R;
@@ -17,23 +19,25 @@ import com.devpost.airway.R;
 public class WebViewActivity extends AppCompatActivity
 {
     private ProgressDialog prDialog;
-    private static String URL ;
+    private static final String URL = "https://m.airberlin.com/en/flightbooking/search";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+        if(getSupportActionBar()!=null)
+            getSupportActionBar().hide();
         setContentView(R.layout.activity_web_view);
 
-        if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if(extras == null) {
-                URL = null;
-            } else {
-                URL = extras.getString("URL");
+        ImageButton im = (ImageButton)findViewById(R.id.backFlightBook);
+        im.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
-        } else {
-            URL = (String) savedInstanceState.getSerializable("URL");
-        }
+        });
+
+
         WebView browser = (WebView) findViewById(R.id.webview);
 
 

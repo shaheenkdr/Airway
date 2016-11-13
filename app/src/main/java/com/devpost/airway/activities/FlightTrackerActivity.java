@@ -1,11 +1,18 @@
 package com.devpost.airway.activities;
 
+import android.app.Activity;
+import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.devpost.airway.R;
@@ -34,12 +41,7 @@ import retrofit2.Response;
 
 public class FlightTrackerActivity extends AppCompatActivity
 {
-    private static final String URL_ARRIVAL = "https://api.flightstats.com/flex/flightstatus/rest/v2/json/airport/tracks/TXL/arr";
-    private static final String URL_DEPARTURE = "https://api.flightstats.com/flex/flightstatus/rest/v2/json/airport/tracks/TXL/dep";
-    private static final String CARRIER_ID = "AB";
-    private static final boolean FLIGHT_PLAN = false;
-    private static final int MAX_POSITION = 2;
-    private static final int MAX_FLIGHTS = 5;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,15 @@ public class FlightTrackerActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_flight_tracker);
 
+        ImageButton im1 = (ImageButton)findViewById(R.id.backFlightTrack);
+        im1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Arrival"));
         tabLayout.addTab(tabLayout.newTab().setText("Departure"));
@@ -59,6 +70,7 @@ public class FlightTrackerActivity extends AppCompatActivity
         final TabsPagerAdapter adapter = new TabsPagerAdapter
                 (getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
+
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -79,6 +91,7 @@ public class FlightTrackerActivity extends AppCompatActivity
 
         //getArrivalValues();
     }
+
 
 
 

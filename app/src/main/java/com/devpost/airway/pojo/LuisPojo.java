@@ -2,8 +2,6 @@ package com.devpost.airway.pojo;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.devpost.airway.pojo.IntentX;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -12,9 +10,9 @@ public class LuisPojo {
     @SerializedName("query")
     @Expose
     private String query;
-    @SerializedName("intents")
+    @SerializedName("topScoringIntent")
     @Expose
-    private List<IntentX> intents = new ArrayList<IntentX>();
+    private TopScoringIntent topScoringIntent;
     @SerializedName("entities")
     @Expose
     private List<Object> entities = new ArrayList<Object>();
@@ -40,19 +38,19 @@ public class LuisPojo {
     /**
      *
      * @return
-     * The intents
+     * The topScoringIntent
      */
-    public List<IntentX> getIntents() {
-        return intents;
+    public TopScoringIntent getTopScoringIntent() {
+        return topScoringIntent;
     }
 
     /**
      *
-     * @param intents
-     * The intents
+     * @param topScoringIntent
+     * The topScoringIntent
      */
-    public void setIntents(List<IntentX> intents) {
-        this.intents = intents;
+    public void setTopScoringIntent(TopScoringIntent topScoringIntent) {
+        this.topScoringIntent = topScoringIntent;
     }
 
     /**

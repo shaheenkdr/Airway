@@ -37,4 +37,6 @@ public class TabsPagerAdapter extends FragmentPagerAdapter
     public int getCount() {
         return mNumOfTabs;
     }
+
+
 }

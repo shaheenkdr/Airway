@@ -1,27 +1,36 @@
 package com.devpost.airway.activities;
 
 import android.Manifest;
+import android.animation.ValueAnimator;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.devpost.airway.R;
 import com.devpost.airway.actions.ActionStarter;
+import com.devpost.airway.flappybirdgame.FlappyBirdGame;
 import com.devpost.airway.intents.Meditate;
+import com.devpost.airway.two.TwoGameActivity;
 import com.devpost.airway.utility.DeveloperKey;
 import com.devpost.airway.utility.ResponseX;
 import com.devpost.airway.utility.Text;
@@ -37,7 +46,7 @@ import com.devpost.airway.intents.Help;
 import com.devpost.airway.intents.None;
 import com.devpost.airway.intents.Personal;
 import com.devpost.airway.intents.Places;
-import com.devpost.airway.pojo.IntentX;
+import com.devpost.airway.pojo.TopScoringIntent;
 import com.devpost.airway.pojo.LuisPojo;
 import com.devpost.airway.utility.Util;
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
@@ -46,7 +55,6 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,19 +63,11 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity
 {
-    private ArrayList<Text> adapter_data;
-    private RecyclerView chat_view;
-    private CustomAdapter adapter;
-    private Text test1;
-    private Text test2;
-    private Text test3;
-    private Context mContext;
-    private static int event_id;
-    private static int response_code;
+
     private Intent intent;
     private static boolean flag;
-    private static final String id ="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX";
-    private static final String sub_key ="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+    private static final String id ="44e80599-c74c-4bc7-b30e-41730a6adfb2";
+    private static final String sub_key ="3c12c7fd5d4c408ab856288e695ee5f7";
     private static final String YOUTUBE_BASE_URL = "https://www.youtube.com/watch?v=";
     private static final int REQUEST_PHONE_CALL = 1;
 
@@ -76,69 +76,226 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        finish();
-        Intent temp = new Intent(MainActivity.this,DelayIndexActivity.class);
-        startActivity(temp);
-        /*intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "+918511812660"));
+        flag = false;
 
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CALL_PHONE},REQUEST_PHONE_CALL);
-            }
-            else
+
+        final ScrollView scroll = (ScrollView)findViewById(R.id.scrollX);
+       // scroll.post(new Runnable() { public void run() { scroll.fullScroll(View.FOCUS_DOWN); } });
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+        {
+            ValueAnimator realSmoothScrollAnimation =
+                    ValueAnimator.ofInt(scroll.getScrollY(), 300);
+            realSmoothScrollAnimation.setDuration(2000);
+            realSmoothScrollAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener()
             {
-                startActivity(intent);
-            }
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation)
+                {
+                    int scrollTo = (Integer) animation.getAnimatedValue();
+                    scroll.scrollTo(0, scrollTo);
+                }
+            });
+
+            realSmoothScrollAnimation.start();
         }
         else
         {
-            startActivity(intent);
+            scroll.smoothScrollTo(0, 300);
         }
-*/
 
-        EventBus myEventBus = EventBus.getDefault();
-        EventBus.getDefault().register(this);
-        event_id = response_code = -1;
-        flag = false;
-        test1 = new Text("Hello I am tom cruise",true);
-        test2 = new Text("wow nice to meet",false);
-        test3 = new Text("nice to meet you",true);
-        adapter_data = new ArrayList<>();
-        adapter_data.add(test1);
-        adapter_data.add(test2);
-        adapter_data.add(test3);
-        chat_view = (RecyclerView)findViewById(R.id.chatView);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        chat_view.setLayoutManager(llm);
-        adapter = new CustomAdapter(adapter_data);
-        chat_view.setAdapter(adapter);
-        mContext = getApplicationContext();
-        final EditText test = (EditText)findViewById(R.id.chat_input);
-        test.setOnEditorActionListener(new TextView.OnEditorActionListener()
-        {
+        final CardView trackCard = (CardView)findViewById(R.id.flightTracker);
+        trackCard.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                boolean handled = false;
-                if (actionId == EditorInfo.IME_ACTION_SEND)
-                {
-                    // TODO do something
-                    handled = true;
-                    doGetRequest(test.getText().toString().trim());
-                    Log.e("WhileSending",""+test.getText().toString().trim());
-                    adapter_data.add(new Text(test.getText().toString(),true));
-                    adapter.notifyDataSetChanged();
-                    chat_view.smoothScrollToPosition(adapter_data.size()-1);
-                    InputMethodManager inputManager = (InputMethodManager)
-                            getSystemService(Context.INPUT_METHOD_SERVICE);
+            public void onClick(View view)
+            {
+                new AlertDialog.Builder(MainActivity.this)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                Intent intent = new Intent(MainActivity.this,FlightTrackerActivity.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .setTitle("Flight Tracker")
+                        .setMessage("Would you like to track a flight?")
+                        .show();
 
 
-                    inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
-                            InputMethodManager.HIDE_NOT_ALWAYS);
-                    test.setText("");
-                }
-                return handled;
             }
         });
+
+        final CardView delayCard = (CardView)findViewById(R.id.flightDelay);
+        delayCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                new AlertDialog.Builder(MainActivity.this)
+                        .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                Intent intent = new Intent(MainActivity.this,DelayIndexActivity.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .setTitle("Delay Index")
+                        .setMessage("Would you like to find the delay at airport?")
+                        .show();
+
+            }
+        });
+
+        final CardView foodCard = (CardView)findViewById(R.id.flightRestaurant);
+        foodCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                new AlertDialog.Builder(MainActivity.this)
+                        .setPositiveButton("sure", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                Intent intent = new Intent(MainActivity.this,FoodActivity.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .setTitle("Food")
+                        .setMessage("Would you like to find nearby restaurants?")
+                        .show();
+
+            }
+        });
+
+        final CardView bookCard = (CardView)findViewById(R.id.flightBook);
+        bookCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                new AlertDialog.Builder(MainActivity.this)
+                        .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                Intent intent = new Intent(MainActivity.this,WebViewActivity.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .setTitle("Book Ticket")
+                        .setMessage("Would you like to book a flight ticket?")
+                        .show();
+
+            }
+        });
+
+        final CardView gameCard = (CardView)findViewById(R.id.flightGame);
+        gameCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                new AlertDialog.Builder(MainActivity.this)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                if(!flag)
+                                {
+                                    flag = true;
+                                    Intent intent = new Intent(MainActivity.this, FlappyBirdGame.class);
+                                    startActivity(intent);
+                                }
+                                else
+                                {
+                                    flag = false;
+                                    Intent intent = new Intent(MainActivity.this, TwoGameActivity.class);
+                                    startActivity(intent);
+                                }
+
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .setTitle("Games")
+                        .setMessage("How about playing some games?")
+                        .show();
+
+
+            }
+        });
+
+        final CardView meditateCard = (CardView)findViewById(R.id.flightMeditate);
+        meditateCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                new AlertDialog.Builder(MainActivity.this)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                Intent intent = new Intent(MainActivity.this,MeditationActivity.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .setTitle("Meditate")
+                        .setMessage("Stressed or tired, meditation should help")
+                        .show();
+
+            }
+        });
+
+        final CardView travelCard = (CardView)findViewById(R.id.flightPlaces);
+        travelCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                new AlertDialog.Builder(MainActivity.this)
+                        .setPositiveButton("sure", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                getSupportForPlaces();
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .setTitle("Travel")
+                        .setMessage("How about watching some of the best places to travel?")
+                        .show();
+
+            }
+        });
+
+        final FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fabx);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                new AlertDialog.Builder(MainActivity.this)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                makeCall();
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .setTitle("Need help")
+                        .setMessage("Would you like to call our support team")
+                        .show();
+
+            }
+        });
+
+
+
+
+
 
 
 
@@ -161,155 +318,11 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private  void doGetRequest(final String message)
-    {
-        ApiInterface apiService =
-                ApiClient.getClient().create(ApiInterface.class);
-
-        Call<LuisPojo> call = apiService.getValues(id,sub_key,message);
-        call.enqueue(new Callback<LuisPojo>()
-        {
-            @Override
-            public void onResponse(Call<LuisPojo>call, Response<LuisPojo> response)
-            {
-                try
-                {
-                    double temp = 0;
-                    StringBuilder val = new StringBuilder();
-                    Log.e("Thenga",""+response.body().toString());
-                    List<IntentX> intx = response.body().getIntents();
-                    Log.e("Intentx",""+intx.size());
-                    for(IntentX x:intx)
-                    {
-                        Log.e("Intents",""+x.getIntent());
-                        if(x.getScore()>temp)
-                        {
-                            temp = x.getScore();
-                            val.setLength(0);
-                            val.append(x.getIntent());
-                        }
-                    }
-                    EventBus.getDefault().post(new LuisResponseBus(val.toString(),message));
-
-                }
-                catch (Exception e)
-                {
-                    Toast.makeText(MainActivity.this, "Check data connection", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<LuisPojo> call, Throwable t) {
-                // Log error here since request failed
-                Log.e("FAILURE", t.toString());
-            }
-        });
-    }
-
-    @Subscribe
-    public void onEvent(LuisResponseBus event)
-    {
-        responseProcessor(event);
-    }
-
-    private void responseProcessor(LuisResponseBus event)
-    {
-        ResponseX reply_msg = new ResponseX(0,"",99,false);
-        if(flag)
-        {
-            if(event.getOriginalMessage().contains("yes")||event.getOriginalMessage().contains("ye")||event.getOriginalMessage().contains("yea")||event.getOriginalMessage().contains("yeah"))
-            {
-                if(getEventIdForIntent(event.getIntentName())==1)
-                {
-                    ActionStarter a1 = new ActionStarter(mContext,1);
-                }
-
-                if(getEventIdForIntent(event.getIntentName())==3)
-                {
-                    ActionStarter a1 = new ActionStarter(mContext,3);
-                }
-            }
-            else
-            {
-                flag = false;
-            }
-        }
-        else
-        {
-            if(getEventIdForIntent(event.getIntentName())!=8 && getEventIdForIntent(event.getIntentName())!=7 && getEventIdForIntent(event.getIntentName())!=4)
-            {
-                switch (getEventIdForIntent(event.getIntentName()))
-                {
-                    case 1: reply_msg = Booking.chooseBooking(event.getOriginalMessage());
-                        break;
-                    case 2: reply_msg = Food.chooseFood(event.getOriginalMessage());
-                        break;
-                    case 3: reply_msg = Games.chooseGames(event.getOriginalMessage());
-                        break;
-                    case 5: reply_msg = Help.chooseHelp();
-                        break;
-                    case 6: reply_msg = Meditate.chooseMeditate(event.getOriginalMessage());
-                        break;
-                    case 9: reply_msg = Places.choosePlace();
-                        break;
-                }
-                flag = true;
-                getSupportForPlaces();
-
-            }
-            else
-            {
-                switch (getEventIdForIntent(event.getIntentName()))
-                {
-                    case 8: reply_msg = Personal.choosePersonal(event.getOriginalMessage());
-                        break;
-                    case 7: reply_msg = None.chooseNone();
-                        break;
-                    case 4: reply_msg = Greetings.chooseGreetings(event.getOriginalMessage());
-                        break;
-                }
-                flag = false;
-            }
-            adapter_data.add(new Text(reply_msg.getResponse(),false));
-            adapter.notifyDataSetChanged();
-            chat_view.smoothScrollToPosition(adapter_data.size()-1);
-        }
 
 
 
-    }
 
 
-    private static int getEventIdForIntent(String value)
-    {
-        int ret_value;
-        switch (value)
-        {
-            case "None": ret_value = 7;
-                break;
-            case "Food": ret_value = 2;
-                break;
-            case "Greetings": ret_value = 4;
-                break;
-            case "Booking": ret_value = 1;
-                break;
-            case "help": ret_value = 5;
-                break;
-            case "games": ret_value = 3;
-                break;
-            case "Personal": ret_value = 8;
-                break;
-            case "Places": ret_value = 9;
-                break;
-            case "Meditate": ret_value = 6;
-                break;
-            default: ret_value = -1;
-                break;
-        }
-
-        return ret_value;
-
-    }
 
     private void getSupportForPlaces()
     {
@@ -317,9 +330,8 @@ public class MainActivity extends AppCompatActivity
         String[] place_url = {"9l7wiqEGrfc","PtWeqZsuzpE","x0Pa8aIqmNI","ZQnDpCjtSfE","LAxf-05NTRY","h9fHP9IvbiI","HL69WXRQrO0","CES7WqrYuSE","L_bgTJkFk3k","B_Hfmp-z7AE"};
 
         int x = Util.getRandom(10);
-        adapter_data.add(new Text(place_message[x],false));
-        adapter.notifyDataSetChanged();
-        chat_view.smoothScrollToPosition(adapter_data.size()-1);
+
+
 
         Intent intent = YouTubeStandalonePlayer.createVideoIntent(MainActivity.this, DeveloperKey.DEVELOPER_KEY, place_url[x]);
         Bundle extras = new Bundle();
@@ -327,6 +339,26 @@ public class MainActivity extends AppCompatActivity
         intent.putExtras(extras);
         startActivity(intent);
 
+
+    }
+
+    private void makeCall()
+    {
+        intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "+918511812660"));
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CALL_PHONE},REQUEST_PHONE_CALL);
+            }
+            else
+            {
+                startActivity(intent);
+            }
+        }
+        else
+        {
+            startActivity(intent);
+        }
 
     }
 }

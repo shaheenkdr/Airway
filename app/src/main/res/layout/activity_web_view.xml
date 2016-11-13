@@ -4,8 +4,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.WebViewActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolBook"
+        android:elevation="8dp"
+        android:background="@color/primary"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/backFlightBook"
+                android:layout_centerVertical="true"
+                android:background="@android:color/transparent"
+                android:src="@drawable/back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/flightbookText"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:text="Airway"
+                android:textSize="18sp"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
 
     <WebView
+        android:layout_below="@+id/toolBook"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/webview"
         android:layout_width="match_parent"

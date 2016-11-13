@@ -1,6 +1,8 @@
 package com.devpost.airway.adapter;
 
+import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.devpost.airway.R;
+import com.devpost.airway.activities.FlightMapActivity;
 
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
@@ -57,8 +60,15 @@ public class FlightDepartureAdapter extends RecyclerView.Adapter<FlightDeparture
         @Override
         public void onClick(View view)
         {
-
-
+            Intent passCoordinates = new Intent(itemView.getContext(), FlightMapActivity.class);
+            Bundle extras = new Bundle();
+            extras.putString("FLIGHT_NAME",d1.departure_records.get(getLayoutPosition()).getFlightNo());
+            extras.putInt("SPEED",d1.departure_records.get(getLayoutPosition()).getSpeed());
+            extras.putInt("ALT",d1.departure_records.get(getLayoutPosition()).getHeight());
+            extras.putDouble("LAT", d1.departure_records.get(getLayoutPosition()).getLatitude());
+            extras.putDouble("LON", d1.departure_records.get(getLayoutPosition()).getLongitude());
+            passCoordinates.putExtras(extras);
+            itemView.getContext().startActivity(passCoordinates);
 
         }
     }

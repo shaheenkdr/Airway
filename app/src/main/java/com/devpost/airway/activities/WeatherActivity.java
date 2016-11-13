@@ -7,18 +7,11 @@ import android.widget.Toast;
 
 import com.devpost.airway.R;
 import com.devpost.airway.api.ApiClient;
-import com.devpost.airway.api.ApiInterface;
-import com.devpost.airway.bus.LuisResponseBus;
 import com.devpost.airway.flightstats.s.apis.WeatherApiInterface;
 import com.devpost.airway.flightstats.s.weather.WeatherPojo;
-import com.devpost.airway.pojo.IntentX;
-import com.devpost.airway.pojo.LuisPojo;
 import com.devpost.airway.utility.Util;
 
-import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
